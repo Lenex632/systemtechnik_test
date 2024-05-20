@@ -13,12 +13,14 @@ if __name__ == '__main__':
 
     # проверяем, что сайт работает
     if response.status_code == 200:
+        print('Сайт работает')
         # узнаём ip адрес хоста, но в задании не было сказано его выводить куда-то, поэтому я и не стал
         ip = socket.gethostbyname(site)
         # находим номер на главной странице
         soup = BeautifulSoup(response.content, 'html.parser')
         # в задании был указан один конкретный сайт, так что я пропарсил именно его конкретную структуру
         phone = soup.find('div', class_='phone-number').contents[0].text
+        print(phone)
         # "очищаем" номер
         phone = re.sub(' ', '', phone)
         if phone.startswith('8'):
